@@ -25,6 +25,18 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api/whoami", function (req, res) {
+  var language = Intl.DateTimeFormat().resolvedOptions().locale;
+  var os = require('os');
+  var networkInterfaces = os.networkInterfaces();
+  var ipaddress = networkInterfaces.eth0[0].address;
+
+  var machine_ver = os.type() + ' ' + os.release() + ' ' +os.platform();
+
+  res.json({"ipaddress":ipaddress,"language":language,
+"software":machine_ver});
+});
+
 
 
 // listen for requests :)
